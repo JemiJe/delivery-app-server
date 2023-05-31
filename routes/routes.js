@@ -35,6 +35,7 @@ router.get("/company", async (req, res) => {
   }
 });
 
+// get all store products
 router.get("/company/:id", async (req, res) => {
   try {
     const data = await Company.findOne({ id: req.params.id });
@@ -44,7 +45,7 @@ router.get("/company/:id", async (req, res) => {
   }
 });
 
-// get products
+// get products by company
 router.get("/product", async (req, res) => {
   try {
     const data = await Product.find();
