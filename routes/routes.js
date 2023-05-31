@@ -54,7 +54,7 @@ router.get("/product", async (req, res) => {
   }
 });
 // find all products belonging to a specific company (companyId)
-router.get("/product/:id", async (req, res) => {
+router.get("/company/:id/product", async (req, res) => {
   try {
     const data = await Product.find({ companyId: req.params.id });
     res.json(data);
