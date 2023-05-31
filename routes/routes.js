@@ -25,6 +25,26 @@ router.post("/order", async (req, res) => {
   }
 });
 
+//get orders status
+router.get("/orders", async (req, res) => {
+  try {
+    const data = await Order.find();
+
+    const totalProducts = data.reduce(
+      (sum, order) => sum + order.cart.length,
+      0
+    );
+
+    res.json({
+      totalOrders: data.length,
+      totalProductsOrdered: totalProducts,
+      lastFrom: data[data.length - 1].name,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 // get companies
 router.get("/company", async (req, res) => {
   try {
@@ -35,7 +55,7 @@ router.get("/company", async (req, res) => {
   }
 });
 
-// get all store products
+// get 1 company
 router.get("/company/:id", async (req, res) => {
   try {
     const data = await Company.findOne({ id: req.params.id });
@@ -45,7 +65,7 @@ router.get("/company/:id", async (req, res) => {
   }
 });
 
-// get products by company
+// get all store products
 router.get("/product", async (req, res) => {
   try {
     const data = await Product.find();
