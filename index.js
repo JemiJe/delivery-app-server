@@ -2,6 +2,7 @@ const express = require("express");
 var cors = require("cors");
 const mongoose = require("mongoose");
 const routes = require("./routes/routes");
+const frontRoutes = require("./routes/front");
 
 require("dotenv").config();
 const mongoString = process.env.DATABASE_URL;
@@ -28,6 +29,7 @@ const app = express();
 
 app.use(express.json());
 app.use("/api", routes);
+app.use("/", frontRoutes);
 app.use(cors());
 
 connectDB().then(() => {

@@ -26,4 +26,4 @@ nodemon index.js
 
 ## additional
 
-to get rid CORS error, is used cors proxy https://corsproxy.io/
+to fetch use https://corsproxy.io/
