@@ -23,7 +23,3 @@ nodemon index.js
 - GET `/api/company/:id` - get one company by id
 - GET `/api/product` - get all store products
 - GET `/company/:id/product` - get all products belonging to a specific company (:id = companyId)
-
-## additional
-
-to fetch use https://corsproxy.io/
