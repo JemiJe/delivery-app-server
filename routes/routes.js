@@ -9,6 +9,7 @@ const router = express.Router();
 // post new order
 router.post("/order", async (req, res) => {
   const data = new Order({
+    date: req.body.date,
     address: req.body.address,
     email: req.body.email,
     name: req.body.name,
@@ -30,15 +31,20 @@ router.get("/orders", async (req, res) => {
   try {
     const data = await Order.find();
 
-    const totalProducts = data.reduce(
-      (sum, order) => sum + order.cart.length,
-      0
+    const totals = data.reduce(
+      (sum, order) => {
+        sum.totalOrders += 1;
+        sum.totalProductsOrdered += order.cart.length;
+        sum.totalSum += order.total;
+        return sum;
+      },
+      { totalOrders: 0, totalProductsOrdered: 0, totalSum: 0 }
     );
 
     res.json({
-      totalOrders: data.length,
-      totalProductsOrdered: totalProducts,
+      ...totals,
       lastFrom: data[data.length - 1].name,
+      lastFromDate: data[data.length - 1].date,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });

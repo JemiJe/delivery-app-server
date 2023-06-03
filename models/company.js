@@ -5,6 +5,10 @@ const company = new mongoose.Schema({
     required: true,
     type: String,
   },
+  companyAddress: {
+    lat: Number,
+    lng: Number,
+  },
   id: {
     required: true,
     type: Number,
